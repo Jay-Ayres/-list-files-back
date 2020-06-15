@@ -1,12 +1,13 @@
+import files from "list-files-pkg";
+
 class FolderController {
-  async index(req, res) {
-    //const events = await Event.findAll(); call the lib here
-    let folders = [
-      { name: "folder1", size: "1gb", updatedDate: "2020/06/01" },
-      { name: "folder2", size: "1gb", updatedDate: "2020/06/01" },
-      { name: "folder3", size: "1gb", updatedDate: "2020/06/01" }
-    ];
-    return res.status(200).json(folders);
+  async getByPath(req, res) {
+    try {
+      const myFiles = files.getOrderedlist(req.body.path);
+      return res.status(200).json(myFiles);
+    } catch (error) {
+      return res.status(400).json({ error: "Invalid request" });
+    }
   }
 }
 

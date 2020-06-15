@@ -1,5 +1,6 @@
 import "./bootstrap";
 import express from "express";
+import cors from "cors";
 import routes from "./routes";
 
 class App {
@@ -10,11 +11,11 @@ class App {
   }
 
   middlewares() {
-    //con isso a app pode trabalhar com requisicoes json
     this.server.use(express.json());
   }
 
   routes() {
+    this.server.use(cors());
     this.server.use(routes);
   }
 }
